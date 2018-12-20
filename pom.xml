@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sample</groupId>
+    <artifactId>maven_aggregator</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>aggregator</name>
+
+    <properties>
+        <mods.directory>C:\Xylem\xylem_workspace\poc\maven_aggregator\target</mods.directory>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>all</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>../packageVertx/vertx-acoustic-module</module>
+                <module>../packageVertx/vertx-common-module</module>
+                <module>../packageVertx/vertx-pressure-module</module>
+                <module>../RedisPubSub/periodic_mongo_insert</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>acoustic</id>
+            <modules>
+                <module>../packageVertx/vertx-common-module</module>
+                <module>../packageVertx/vertx-acoustic-module</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>pressure</id>
+            <modules>
+                <module>../packageVertx/vertx-common-module</module>
+                <module>../packageVertx/vertx-pressure-module</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>mongo</id>
+            <modules>
+                <module>../RedisPubSub/periodic_mongo_insert</module>
+            </modules>
+        </profile>
+    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <skipIfEmpty>true</skipIfEmpty>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
